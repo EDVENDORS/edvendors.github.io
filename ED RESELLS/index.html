@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ED RESELLS</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2ecc71;
+        --background-color: #121212;
+        --surface-color: #1e1e1e;
+        --text-color: #e0e0e0;
+        --accent-color: #e74c3c;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease;
+        overflow-x: hidden;
+    }
+
+       header {
+        background-color: var(--surface-color);
+        color: var(--text-color);
+        text-align: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            var(--primary-color),
+            var(--secondary-color),
+            var(--accent-color)
+        );
+        animation: rotate 10s linear infinite;
+        opacity: 0.1;
+        z-index: 0;
+    }
+       
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .animate-on-scroll.animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .product-views {
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    header h1 {
+        position: relative;
+        z-index: 1;
+        font-size: 2.5rem;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: glowText 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowText {
+        from {
+            text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+        }
+        to {
+            text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+        }
+    }
+
+        nav {
+        background-color: var(--surface-color);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+    nav ul li {
+        margin: 0 1rem;
+    }
+
+    nav ul li a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        background-color: var(--primary-color);
+        color: var(--background-color);
+        transform: scale(1.1);
+    }
+
+
+    main {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    section {
+        background-color: var(--surface-color);
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        margin-bottom: 2rem;
+        padding: 2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+        font-size: 2rem;
+        margin-top: 0;
+        position: relative;
+        display: inline-block;
+    }
+
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--accent-color);
+        transition: width 0.3s ease;
+    }
+
+    section:hover h2::after {
+        width: 100%;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .product {
+        background-color: var(--surface-color);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        position: relative;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+
+    .product:hover {
+        transform: translateY(-10px) rotateY(10deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .product img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 15px 15px 0 0;
+        transition: transform 0.3s ease;
+    }
+
+    .product:hover img {
+        transform: scale(1.1) rotateY(-10deg);
+    }
+
+    .product-info {
+        padding: 1.5rem;
+        transform: translateZ(20px);
+    }
+
+    .product h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+    }
+
+    .product p {
+        font-size: 0.9rem;
+        color: var(--text-color);
+        opacity: 0.8;
+    }
+
+    .buy-button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--secondary-color);
+        color: var(--background-color);
+        text-align: center;
+        text-decoration: none;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .buy-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: all 0.5s;
+    }
+
+    .buy-button:hover::before {
+        left: 100%;
+    }
+
+    .buy-button:hover {
+        background-color: var(--accent-color);
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+    }
+
+    footer {
+        background-color: var(--surface-color);
+        color: var(--text-color);
+        text-align: center;
+        padding: 2rem;
+        margin-top: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            var(--primary-color),
+            var(--secondary-color),
+            var(--accent-color)
+        );
+        animation: rotate 20s linear infinite;
+        opacity: 0.05;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .social-icons a {
+        color: var(--text-color);
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+        color: var(--primary-color);
+        transform: translateY(-5px) scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+        .product-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--background-color);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color);
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .product {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .product:nth-child(odd) {
+        animation-delay: 2s;
+    }
+    </style>
+</head>
+<body>
+    <header style="background-image: url('path/to/your/image.jpg');">
+        <h1>ED VENDORS</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#supreme-bundle">Supreme</a></li>
+            <li><a href="#electronics">Electronics</a></li>
+            <li><a href="#clothing">Clothing</a></li>
+            <li><a href="#accessories">Accessories</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="supreme-bundle" class="animate-on-scroll">
+            <h2>Supreme Bundle</h2>
+            <p>Get all three vendor bundles in one supreme package!</p>
+            <a href="https://buy.stripe.com/28o3ff3dl1fJ3EkcMP" class="buy-button">Buy Supreme Vendor Bundle - $34.99</a>
+        </section>
+       
+        <section id="electronics" class="animate-on-scroll">
+            <h2>Electronics</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images/iphone.jpeg" alt="Iphone">
+                    <p>Iphonee</p>
+                </div>
+                <div class="product">
+                    <img src="images/airpodmax.jpeg" alt="AirPods Max">
+                    <p>AirPodss Maxx</p>
+                </div>
+                <div class="product">
+                    <img src="images/airpods.jpeg" alt="AirPods">
+                    <p>AirPodss</p>
+                </div>
+                <div class="product">
+                    <img src="images/applepencil.jpeg" alt="Apple Pencil">
+                    <p>Applee Pencill</p>
+                </div>
+                <div class="product">
+                    <img src="images/magsafe.avif" alt="Apple MagSafe">
+                    <p>Applee MagSafee</p>
+                </div>
+                <div class="product">
+                    <img src="images/s24ultra.webp" alt="S24 Ultra">
+                    <p>S24 Ultraa (Phone)</p>
+                </div>
+                <div class="product">
+                    <img src="images/galaxybuds.jpg" alt="Galaxy Bugs">
+                    <p>Galaxyy Budss</p>
+                </div>
+                <div class="product">
+                    <img src="images/dysonbd.jpeg" alt="Blow driers">
+                    <p>Dysonn Bloww drierss</p>
+                </div>
+                <div class="product">
+                    <img src="images/dysonci.webp" alt="Curling irons">
+                    <p>Dysonn Curlingg ironss</p>
+                </div>
+                <div class="product">
+                    <img src="images/jbl.jpg" alt="JBL Speaker">
+                    <p>JBL Speakerr</p>
+                </div>
+                <div class="product">
+                    <img src="images/beats.jpg" alt="Beats headphones">
+                    <p>Beatss headphoness</p>
+                </div>
+                <div class="product">
+                    <img src="images/smb7.jpg" alt="SM7B Microphone">
+                    <p>SM7B Microphonee</p>
+                </div>
+            </div>
+            <a href="https://buy.stripe.com/5kA7vv9BJcYr4Io9AA" class="buy-button">Buy Electronics Vendor Bundle - $24.99</a>
+        </section>
+
+        <section id="clothing" class="animate-on-scroll">
+            <h2>Clothing</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images2/spider.avif" alt="SPIDER">
+                    <p>SPIDER</p>
+                </div>
+                <div class="product">
+                    <img src="images2/bape.jpg" alt="BAPE">
+                    <p>BAPEE</p>
+                </div>
+                <div class="product">
+                    <img src="images2/eeshorts.jpg" alt="EE Shorts">
+                    <p>EE Shortss</p>
+                </div>
+                <div class="product">
+                    <img src="images2/chromehearts.webp" alt="Chrome Hearts">
+                    <p>Chromee Heartss</p>
+                </div>
+                <div class="product">
+                    <img src="images2/denimtears.webp" alt="Denim-Tears">
+                    <p>Denim-Tearss</p>
+                </div>
+                <div class="product">
+                    <img src="images2/offwhite.webp" alt="OFF White">
+                    <p>OFF Whitee</p>
+                </div>
+                <div class="product">
+                    <img src="images2/amiri.avif" alt="Amiri">
+                    <p>Amirii</p>
+                </div>
+                <div class="product">
+                    <img src="images2/football.jpg" alt="Football Jerseys">
+                    <p>Football Jerseys</p>
+                </div>
+                <div class="product">
+                    <img src="images2/purple.webp" alt="Purple Jeans">
+                    <p>Purplee Jeanss</p>
+                </div>
+                <div class="product">
+                    <img src="images2/hellstar.jpg" alt="Hellstar">
+                    <p>Hellstarr</p>
+                </div>
+                <div class="product">
+                    <img src="images2/stoneisland.webp" alt="Stone Islands">
+                    <p>Stonee Islandss</p>
+                </div>
+                <div class="product">
+                    <img src="images2/moncler.avif" alt="Moncler Jackets">
+                    <p>Monclerr Jacketss</p>
+                </div>
+                <div class="product">
+                    <img src="images2/canadagoose.webp" alt="Canada Goose Jackets">
+                    <p>Canadaa Goosee Jacketss</p>
+                </div>
+                <div class="product">
+                    <img src="images2/lvbini.jpg" alt="LV Bini">
+                    <p>LV Binii</p>
+                </div>
+                <div class="product">
+                    <img src="images2/palmangles.webp" alt="Palm Angles">
+                    <p>Palmm Angless</p>
+                </div>
+            </div>
+            <a href="https://buy.stripe.com/5kA9DD8xFe2v8YE5kl" class="buy-button">Buy Clothing Vendor Bundle - $19.99</a>
+        </section>
+
+        <section id="accessories" class="animate-on-scroll">
+            <h2>Accessories</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images3/lvbracelet.avif" alt="LV Bracelets">
+                    <p>LV Braceletss</p>
+                </div>
+                <div class="product">
+                    <img src="images3/designerbags.jpg" alt="Designer Bags">
+                    <p>Designer Bags</p>
+                </div>
+                <div class="product">
+                    <img src="images3/designerglasses.jpg" alt="Designer Glasses">
+                    <p>Designer Glasses</p>
+                </div>
+                <div class="product">
+                    <img src="images3/guccishoes.avif" alt="Gucci Shoes">
+                    <p>Guccii Shoess</p>
+                </div>
+                <div class="product">
+                    <img src="images3/balenciaga.jpg" alt="Balenciaga Shoes">
+                    <p>Balenciagaa Shoes</p>
+                </div>
+                <div class="product">
+                    <img src="images3/jordans.jpeg" alt="Jordans">
+                    <p>Jordans</p>
+                </div>
+                <div class="product">
+                    <img src="images3/slides.webp" alt="Slides">
+                    <p>Slides</p>
+                </div>
+                <div class="product">
+                    <img src="images3/uggs.jpeg" alt="UGGS">
+                    <p>UGGS</p>
+                </div>
+                <div class="product">
+                    <img src="images3/af1.png" alt="Air Forces">
+                    <p>Air Forcess</p>
+                </div>
+            </div>
+            <a href="https://buy.stripe.com/eVa033dRZf6z4Io8wy" class="buy-button">Buy Accessories Bundle - $15.99</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ED RESELLS. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
